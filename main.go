@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"os/exec"
 	"strings"
 )
 
@@ -16,7 +17,17 @@ func init() {
 }
 
 func main() {
+	clear()
 	prompt()
+}
+
+func clear() {
+	cmd := exec.Command("clear")
+	cmd.Stdout = os.Stdout
+	err := cmd.Run()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
 }
 
 func prompt() {
