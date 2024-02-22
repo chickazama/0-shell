@@ -30,9 +30,6 @@ func ls(args []string) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	if *LS_A {
-		fmt.Print(".  ..  ")
-	}
 	for _, e := range entries {
 		name := e.Name()
 		if !(strings.HasPrefix(name, ".") && !*LS_A) {
