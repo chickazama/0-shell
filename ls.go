@@ -32,9 +32,8 @@ func ls(fields []string) {
 	}
 	if *recursive {
 		var sb strings.Builder
-		start := "."
 		var output []string
-		err := fs.WalkDir(fsys, start, func(path string, d fs.DirEntry, err error) error {
+		err := fs.WalkDir(fsys, ".", func(path string, d fs.DirEntry, err error) error {
 			if d.IsDir() {
 				if !(strings.HasPrefix(path, ".") && !*all && path != ".") {
 					add := fmt.Sprintf("%s:\n", path)
