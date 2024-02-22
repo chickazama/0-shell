@@ -26,17 +26,17 @@ func ls(args []string) {
 	if err != nil {
 		log.Fatal(err.Error())
 	}
-	dirent, err := fs.ReadDir(os.DirFS(dir), ".")
+	entries, err := fs.ReadDir(os.DirFS(dir), ".")
 	if err != nil {
 		log.Fatal(err.Error())
 	}
 	if *LS_A {
 		fmt.Print(".  ..  ")
 	}
-	for _, ent := range dirent {
-		name := ent.Name()
+	for _, e := range entries {
+		name := e.Name()
 		if !(strings.HasPrefix(name, ".") && !*LS_A) {
-			fmt.Printf("%s  ", ent.Name())
+			fmt.Printf("%s  ", name)
 		}
 	}
 	*LS_A = false
