@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -8,17 +9,30 @@ import (
 	"strings"
 )
 
+const (
+	newline = '\n'
+)
+
 var (
-	HOME string
+	HOME   string
+	reader *bufio.Reader
 )
 
 func init() {
 	HOME = os.Getenv("HOME")
+	reader = bufio.NewReader(os.Stdin)
 }
 
 func main() {
 	clear()
-	prompt()
+	for {
+		prompt()
+		str, err := reader.ReadString(newline)
+		if err != nil {
+			log.Fatal(err.Error())
+		}
+		fmt.Print(str)
+	}
 }
 
 func clear() {
